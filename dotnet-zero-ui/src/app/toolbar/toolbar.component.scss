@@ -1,0 +1,60 @@
+:host {
+  max-height: 32px;
+  height: 32px;
+
+  #close-current-button {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+  }
+
+  mat-toolbar {
+    max-height: 32px;
+    height: 32px;
+
+    #toggle-drawer {
+      height: 32px;
+      width: 32px;
+      line-height: 32px;
+    }
+
+    #logo {
+      font-weight: bold;
+    }
+
+    nav {
+      a {
+        height: 32px;
+      }
+    }
+  }
+}
+
+.mat-tab-label-active {
+  color: white;
+  opacity: 1;
+  background: black;
+}
+
+.mat-tab-link {
+  padding: 0 !important;
+}
+
+.close-x:hover {
+  text-shadow: 0px 0px 3px #fff;
+}
+
+.glow {
+  animation: glow 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+    filter: blur(0px) opacity(100%);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+    filter: blur(4px) opacity(70%);
+  }
+}

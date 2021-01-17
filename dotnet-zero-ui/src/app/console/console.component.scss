@@ -1,0 +1,48 @@
+:host {
+
+  #console-content {
+    background: #000;
+  }
+
+  #close-console {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    mat-icon {
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      line-height: 20px;
+    }
+  }
+
+  ul {
+    overflow: auto;
+    list-style: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      text-shadow: 0px 0px 5px #000;
+      &.Hidden {
+        display: none;
+      }
+
+      &.Error {
+        color: red;
+      }
+
+      &.Warning {
+        color: orange;
+      }
+
+      &.Info {
+        color: inherit;
+      }
+
+      span.file-shortcut {
+        text-decoration: underline;
+      }
+    }
+  }
+}

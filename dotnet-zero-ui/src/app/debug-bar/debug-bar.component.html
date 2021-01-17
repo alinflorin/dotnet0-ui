@@ -1,0 +1,37 @@
+<div fxHide.lt-md fxLayout="row" id="debug-bar">
+  <button [disabled]="d0.state.solution == null" title="Build & run" mat-icon-button class="clickable" (click)="d0.buildAndRun()">
+    <mat-icon>play_circle_filled</mat-icon>
+  </button>
+  <button [disabled]="d0.state.solution == null" title="Build" mat-icon-button class="clickable" (click)="d0.build()">
+    <mat-icon>archive</mat-icon>
+  </button>
+  <button [disabled]="!d0.state.debug.isBuilt" title="Run" mat-icon-button (click)="d0.run()" class="clickable">
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+  <button [disabled]="d0.state.isConsoleVisible" title="Show console" mat-icon-button class="clickable"
+    (click)="d0.openConsole()">
+    <mat-icon>featured_play_list</mat-icon>
+  </button>
+</div>
+
+<button id="debug-menu-button" [matMenuTriggerFor]="menu" fxHide.gt-sm title="Menu" mat-icon-button class="clickable">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button [disabled]="d0.state.solution == null" mat-menu-item (click)="d0.buildAndRun()">
+    <mat-icon>play_circle_filled</mat-icon>
+    <span>Build & run</span>
+  </button>
+  <button [disabled]="d0.state.solution == null" mat-menu-item (click)="d0.build()">
+    <mat-icon>archive</mat-icon>
+    <span>Build</span>
+  </button>
+  <button [disabled]="!d0.state.debug.isBuilt" mat-menu-item (click)="d0.run()">
+    <mat-icon>play_arrow</mat-icon>
+    <span>Run</span>
+  </button>
+  <button [disabled]="d0.state.isConsoleVisible" mat-menu-item (click)="d0.openConsole()">
+    <mat-icon>featured_play_list</mat-icon>
+    <span>Show console</span>
+  </button>
+</mat-menu>

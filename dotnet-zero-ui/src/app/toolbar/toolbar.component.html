@@ -1,0 +1,30 @@
+<mat-toolbar color="accent" fxLayout="row" fxLayoutGap="5px">
+  <button id="toggle-drawer" mat-icon-button (click)="toggleDrawer()">
+    <mat-icon>{{d0.state.isSidebarVisible ? 'chevron_left' : 'chevron_right'}}</mat-icon>
+  </button>
+  <span fxHide.lt-md id="logo" class="clickable" [class.glow]="loaderService.hasOngoingCalls"
+    (click)="navigateToHome()">dotnet0</span>
+  <span fxHide.gt-sm id="logo" class="clickable" [class.glow]="loaderService.hasOngoingCalls"
+    (click)="navigateToHome()">d0</span>
+  <div fxFlex fxLayout="row" fxLayoutAlign="end">
+    <nav fxFlex mat-tab-nav-bar disableRipple *ngIf="d0.state.files.openedFiles.length > 0" fxHide.lt-md>
+      <a mat-tab-link [disableRipple]="true" *ngFor="let file of d0.state.files.openedFiles; let i = index"
+        (click)="switchTab(i)" (auxclick)="closeTab(i, $event)" fxLayout="row" fxLayoutAlign="space-between center"
+        [active]="d0.state.files.currentFileIndex != null && i === d0.state.files.currentFileIndex">
+        {{getFileName(file.path)}}{{file.content !== file.tempContent ? '*' : ''}}
+        <mat-icon color="warn" class="close-x" (click)="closeTab(i, null)">close</mat-icon>
+      </a>
+    </nav>
+    <mat-select [value]="d0.state.files.currentFileIndex" (selectionChange)="switchTab($event.value)"
+      placeholder="Opened files" fxFlex fxHide.gt-sm [disabled]="d0.state.files.openedFiles.length === 0">
+      <mat-option fxFlex *ngFor="let file of d0.state.files.openedFiles; let i = index" [value]="i">
+        <span>{{getFileName(file.path)}}{{file.content !== file.tempContent ? '*' : ''}}</span>
+      </mat-option>
+    </mat-select>
+    <button id="close-current-button" (click)="closeTab(d0.state.files.currentFileIndex, null)" mat-icon-button fxHide.gt-sm
+      *ngIf="d0.state.files.openedFiles.length > 0 && d0.state.files.currentFileIndex != null">
+      <mat-icon color="warn" class="close-x">close</mat-icon>
+    </button>
+    <app-debug-bar></app-debug-bar>
+  </div>
+</mat-toolbar>

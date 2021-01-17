@@ -1,0 +1,47 @@
+:host {
+  .project-tree-invisible {
+    display: none;
+  }
+
+  span.selected {
+    font-weight: bold;
+  }
+
+  .descriptor-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .project-tree ul,
+  .project-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+
+  mat-tree.project-tree {
+    .mat-tree-node, .mat-nested-tree-node {
+      font-size: 12px;
+      min-height: 24px;
+      height: 24px;
+      cursor: pointer;
+      user-select: none;
+      button {
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+      }
+
+      .chevron-button-hidden {
+        width: 24px;
+      }
+    }
+
+    ul {
+      padding-inline-start: 20px;
+    }
+
+  }
+}

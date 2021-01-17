@@ -1,0 +1,47 @@
+﻿@using DotnetZero.Engine.Dto
+
+@code {
+    [JSInvokable]
+    public static async Task<bool> Healthcheck()
+    {
+        await Task.CompletedTask;
+        return true;
+    }
+
+    [JSInvokable]
+    public static async Task<SolutionDto> InitSolution(ConfigDto configDto)
+    {
+        D0.Instance.SetConfig(configDto);
+        return await D0.Instance.InitSolution("MyProgram");
+    }
+
+    [JSInvokable]
+    public static async Task<FileDto> GetFileContent(string projectId, string fileId)
+    {
+        return await D0.Instance.GetFileContent(projectId, fileId);
+    }
+
+    [JSInvokable]
+    public static async Task<FileDto> UpdateFile(FileDto file)
+    {
+        return await D0.Instance.UpdateFile(file);
+    }
+
+    [JSInvokable]
+    public static async Task<ResultDto> Build()
+    {
+        return await D0.Instance.Build();
+    }
+
+    [JSInvokable]
+    public static async Task<ResultDto> Run()
+    {
+        return await D0.Instance.Run();
+    }
+
+    [JSInvokable]
+    public static async Task<MonacoCompletionListDto> GetCompletions(string projectId, string fileId, int index, string currentSource)
+    {
+        return await D0.Instance.GetCompletions(projectId, fileId, index, currentSource);
+    }
+}

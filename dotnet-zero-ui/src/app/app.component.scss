@@ -1,0 +1,19 @@
+:host {
+  width: 100%;
+  height: 100%;
+
+  #wrapper {
+    width: 100%;
+    height: 100%;
+
+    mat-drawer-container, mat-drawer-content, mat-drawer {
+      overflow: hidden;
+    }
+
+    as-split {
+      as-split-area {
+        overflow: hidden;
+      }
+    }
+  }
+}

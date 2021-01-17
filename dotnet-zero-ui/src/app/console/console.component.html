@@ -1,0 +1,18 @@
+<div fxLayout="column" fxFlexFill>
+  <div fxLayout="row">
+    <span>Console</span>
+    <span fxFlex></span>
+    <button (click)="d0.closeConsole()" id="close-console" mat-icon-button>
+      <mat-icon color="warn">close</mat-icon>
+    </button>
+  </div>
+  <ul fxFlex #content id="console-content">
+    <li *ngFor="let m of messages" class="{{ConsoleMessageTypes[m.type]}}" fxLayout="row" fxLayoutGap="5px">
+      <span *ngIf="m.filePath != null" class="clickable file-shortcut"
+        (click)="openFileByPath(m.filePath)">{{m.filePath}}</span>
+      <span *ngIf="m.code != null"><b>{{m.code}}</b></span>
+      <span *ngIf="m.line != null && m.column != null">({{m.line}}, {{m.column}})</span>
+      <span>{{m.message}}</span>
+    </li>
+  </ul>
+</div>

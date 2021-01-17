@@ -1,0 +1,72 @@
+name: deploy-stg
+
+on:
+  push:
+    branches: 
+      - 'master'
+      - 'develop'
+      - 'release/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      
+    - name: Install .NET Core SDK 3.1 Preview
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.100'
+        
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    
+    - name: dotnet build
+      run: dotnet build -c Release
+      working-directory: dotnet-zero-engine
+    
+    - name: npm install
+      run: npm ci
+      working-directory: dotnet-zero-ui
+    
+    - name: npm run build
+      run: npm run build
+      working-directory: dotnet-zero-ui
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: dotnet-zero-ui/build
+    - name: Upload artifacts - Firebase
+      uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: dotnet-zero-ui/firebase.json
+    - name: Upload artifacts - Firebase
+      uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: dotnet-zero-ui/.firebaserc
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:   
+      - name: Download Artifact
+        uses: actions/download-artifact@v1.0.0
+        with:
+          name: build
+      - name: Copy Firebase files
+        run: |
+          mv build/.firebaserc .
+          mv build/firebase.json .
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@v1.1.0
+        with:
+          args: deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

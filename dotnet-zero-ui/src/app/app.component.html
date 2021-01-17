@@ -1,0 +1,29 @@
+<div id="wrapper" fxLayout="column" fxFlexFill>
+  <app-toolbar></app-toolbar>
+  <mat-divider></mat-divider>
+  <mat-drawer-container *ngIf="d0.state.isDotnetLoaded" [hasBackdrop]="false" fxFlex>
+
+    <mat-drawer #drawer [mode]="sidebarMode" [opened]="d0.state.isSidebarVisible">
+      <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer-content>
+      <as-split direction="vertical" unit="pixel" gutterSize="3">
+        <as-split-area size="*">
+          <app-edit-area [style.height]="d0.state.isEditorLoaded ? '100%' : '0px'" (editorInit)="onEditorInit()">
+          </app-edit-area>
+        </as-split-area>
+        <as-split-area *ngIf="d0.state.isConsoleVisible" size="120" minSize="100">
+          <app-console></app-console>
+        </as-split-area>
+      </as-split>
+
+
+    </mat-drawer-content>
+
+  </mat-drawer-container>
+
+  <app-loading *ngIf="!d0.state.isDotnetLoaded" fxFlex></app-loading>
+  <mat-divider></mat-divider>
+  <app-footer></app-footer>
+</div>
